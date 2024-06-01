@@ -1,0 +1,52 @@
+#include<iostream>
+using namespace std;
+class email {
+public:
+	char address[225];
+	bool isValid()
+	{
+		int indexFirstAt = -1, indexLastDot = -1;
+		int flagAtsign = 0;
+		int flagDot = 0;
+		for (int i = 0; address[i] != '\0'; i++) {
+			if (address[i] == '@')
+			{
+				flagAtsign++;
+				if (indexFirstAt == -1)
+				{
+					indexFirstAt=i;
+				}
+			}
+			if (address[i] == '.')
+			{
+				flagDot++;
+				if (indexLastDot == -1)
+				{
+					indexLastDot = i;
+				}
+			}
+		}
+		if (flagAtsign == 1)
+		{
+			if (indexLastDot > indexFirstAt)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+};
+int main()
+{
+	email Email;
+	cout << "Enter email address: ";
+	cin >> Email.address;
+	if (Email.isValid()) {
+		cout << "right email!";
+	}
+	else 
+	{
+		cout << "wrong email!";
+	}
+	return 0;
+}
